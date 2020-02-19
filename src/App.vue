@@ -1,28 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <AppImage v-for="i in imagesCount"
+              :key="i"
+              :src="`./images/cat-${i}.jpg`"
+              :nativeLazy="nativeLazy"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import AppImage from '@/components/AppImage'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      imagesCount: 48
+    }
+  },
+  created () {
+    this.nativeLazy = 'loading' in HTMLImageElement.prototype
+  },
   components: {
-    HelloWorld
+    AppImage
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
